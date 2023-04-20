@@ -9,6 +9,7 @@ import HomeManager from './component/manager/HomeManager'
 import UpdateDetails from './component/userDetails/UpdateDetails';
 import UsersPermissions from './component/permissions/UsersPermissions';
 import PermissionsTable from './component/permissions/PermissionsTable';
+import AddCategory from './component/manager/categories/AddCategory';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route exact path='/updateDetails' element={<UpdateDetails />}></Route>
           <Route exact path='/usersPermissions' element={<UsersPermissions />}></Route>
           <Route exact path='/permissionsTable' element={<PermissionsTable />}></Route>
+          <Route exact path='/categories' element={<AddCategory />}></Route>
         </Routes>
       
     </>
