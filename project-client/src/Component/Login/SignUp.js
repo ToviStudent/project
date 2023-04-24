@@ -18,12 +18,16 @@ export default function SignUp() {
     };
     const formik = useFormik({
         initialValues: {
+            Name:'',
             Id: '',
             FamilyName: '',
             Password: ''
         },
         validate: (data) => {
             let errors = {};
+            if (!data.Name) {
+                errors.Name = 'Name is required.';
+            }
             if (!data.Id) {
                 errors.Id = 'Identity is required.';
             }
@@ -57,11 +61,13 @@ export default function SignUp() {
                         <Toast ref={toast} />
                         <InputText
                             id="value"
-                            name="value"
-                            value={value}
-                            onChange={(e) => {
-                                setValue(e.value);
-                            }}
+                            name="Name"
+                            // value={value}
+                            value={formik.values.Name}
+                            onChange={(e) => formik.setFieldValue('Name', e.target.value)}
+                            // onChange={(e) => {
+                            //     setValue(e.value);
+                            // }}
                         />
                         <label htmlFor="input_value">Name</label>
                     </span>
@@ -96,6 +102,7 @@ export default function SignUp() {
                     </div>
                     <br /><br /><br />
                     {/* {getFormErrorMessage('value')} */}
+                    {getFormErrorMessage('Name')}
                     {getFormErrorMessage('Id')}
                     {getFormErrorMessage('FamilyName')}
                     {getFormErrorMessage('Password')}

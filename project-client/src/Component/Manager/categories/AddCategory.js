@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { Button } from 'primereact/button';
 // import { ProductService } from './service/ProductService';
 import UseAxiosGet from '../../../hooks/UseAxiosGet';
 
@@ -39,7 +40,9 @@ export default function AddCategory() {
     //   console.log(key);
     // }
 
-
+    function addCategory() {
+        
+    }
 
 
 
@@ -51,6 +54,9 @@ export default function AddCategory() {
                 <Column field="categoryName" header="categoryName"></Column>
                 <Column field="number" header="number"></Column>
             </DataTable>
+            <div className="card flex justify-content-center">
+                        <Button label="add category" onClick={addCategory}/>
+                    </div>
         </div>
     );
 }
