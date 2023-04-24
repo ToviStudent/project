@@ -97,9 +97,9 @@ export default function SignUp() {
                         <label htmlFor="password">Password</label>
                     </span>
                     <br /><br /><br />
-                    <div className="card flex justify-content-center">
+                    {/* <div className="card flex justify-content-center">
                         <Button label="update details" onClick={()=>{navigate('/UpdateDetails')}}/>
-                    </div>
+                    </div> */}
                     <br /><br /><br />
                     {/* {getFormErrorMessage('value')} */}
                     {getFormErrorMessage('Name')}
