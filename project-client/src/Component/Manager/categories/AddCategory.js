@@ -48,8 +48,8 @@ export default function AddCategory() {
         <div className="card">
 
             <DataTable value={categories} tableStyle={{ minWidth: '50rem' }}>
-                <Column field="categoryName" header="Code"></Column>
-                <Column field="number" header="Name"></Column>
+                <Column field="categoryName" header="categoryName"></Column>
+                <Column field="number" header="number"></Column>
             </DataTable>
         </div>
     );
