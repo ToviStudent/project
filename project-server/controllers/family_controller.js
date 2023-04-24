@@ -3,8 +3,10 @@ const userController = require("../controllers/user_controller");
 
 //create - post
 exports.createNewFamily = async(req,res)=>{
-    const _password = req.body.password;
-    const name = req.body.familyName;
+    // const _password = req.body.password;
+    // const name = req.body.familyName;
+    const _password = req.body.Password;
+    const name = req.body.FamilyName;
     const familyToInsert = {password:_password,familyName:name};
     console.log(familyToInsert);
     if(!familyToInsert) 

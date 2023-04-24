@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import {useNavigate} from 'react-router-dom';
 import { useFormik } from 'formik';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
@@ -6,8 +7,10 @@ import { Toast } from 'primereact/toast';
 import { InputText } from "primereact/inputtext";
 import { InputNumber } from 'primereact/inputnumber';
 import { Password } from 'primereact/password';
+import axios from 'axios';
 
 export default function SignUp() {
+    const navigate = useNavigate();
     const toast = useRef(null);
     const [value, setValue] = useState();
     const show = () => {
@@ -32,9 +35,12 @@ export default function SignUp() {
             }
             return errors;
         },
-        onSubmit: (data) => {
+        onSubmit: async(data) => {
             data && show(data);
-            formik.resetForm();
+            // formik.resetForm();
+            await axios.post(`http://localhost:8000/families/signup/`,data);
+            console.log("after post");
+            navigate('/')
         }
     });
 
@@ -72,9 +78,10 @@ export default function SignUp() {
                             id="value"
                             name="FamilyName"
                             value={formik.values.FamilyName}
-                            onChange={(e) => {
-                                setValue(e.value);
-                            }}
+                            // onChange={(e) => {
+                            //     setValue(e.value);
+                            // }}
+                            onChange={(e) => formik.setFieldValue('FamilyName', e.target.value)}
                         />
                         <label htmlFor="input_value">FamilyName</label>
                     </span>
@@ -85,7 +92,7 @@ export default function SignUp() {
                     </span>
                     <br /><br /><br />
                     <div className="card flex justify-content-center">
-                        <Button label="update details" />
+                        <Button label="update details" onClick={()=>{navigate('/UpdateDetails')}}/>
                     </div>
                     <br /><br /><br />
                     {/* {getFormErrorMessage('value')} */}

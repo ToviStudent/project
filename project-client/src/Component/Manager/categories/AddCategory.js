@@ -6,6 +6,7 @@ import UseAxiosGet from '../../../hooks/UseAxiosGet';
 
 export default function AddCategory() {
     // const [products, setProducts] = useState([]);
+
     const [categories, setCategories] = useState(null);
 
     const { data, loading, refetch, error } = UseAxiosGet('manager/categories/another');
@@ -13,13 +14,23 @@ export default function AddCategory() {
     useEffect(() => {
         console.log('data', data);
         if (data) {
-            setCategories(data)
-            // const _keys = categories.keys;
-            // const _values = categories.values();
-            // console.log("keys" + _keys);
-            // console.log("values" + _values);
+            setCategories(Object.entries(data).map(([categoryName, number]) => ({ categoryName, number })))
         }
     }, [data])
+
+    // useEffect(() => {
+    //     if (categories) {
+    //         console.log("categories", categories);
+    //         const parsedCategories = Object.entries(categories).map(([categoryName, number]) => ({ categoryName, number }))
+    //         console.log({ parsedCategories });
+    //         const _keys = Object.keys(categories);
+    //         const _values = Object.values(categories);
+    //         console.log("keys ", _keys);
+    //         console.log("values ", _values);
+    //         // const ccc=categories.map((k,v)=>{"categoryName"=k,"number"=v});
+    //         // console.log("ccc",ccc);
+    //     }
+    // }, [categories]);
 
     // const array1 = ['a', 'b', 'c'];
     // const iterator = array1.keys();
@@ -28,16 +39,17 @@ export default function AddCategory() {
     //   console.log(key);
     // }
 
-    // useEffect(() => {
-    //     ProductService.getProductsMini().then(data => setProducts(data));
-    // }, []);
+
+
+
 
 
     return (
         <div className="card">
+
             <DataTable value={categories} tableStyle={{ minWidth: '50rem' }}>
-                <Column field="code" header="Code"></Column>
-                <Column field="name" header="Name"></Column>
+                <Column field="categoryName" header="Code"></Column>
+                <Column field="number" header="Name"></Column>
             </DataTable>
         </div>
     );
