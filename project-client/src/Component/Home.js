@@ -7,8 +7,8 @@ import UsersPermissions from './permissions/UsersPermissions';
 import PermissionsTable from './permissions/PermissionsTable'
 
 function Home() {
-  const{data,loading,refetch,error}=UseAxiosGet('users/');
-  useEffect(()=>{console.log('data',data);},[data])
+  // const{data,loading,refetch,error}=UseAxiosGet('users/');
+  // useEffect(()=>{console.log('data',data);},[data])
   const navigate = useNavigate();
     const items1 = [{label:'permissions',icon:<i class="pi pi-lock-open"></i>,command:()=>{navigate('/UpdateDetails')}}];
     const items2 = [{label:'view expenses',icon:<i class="pi pi-arrow-circle-up"></i>},

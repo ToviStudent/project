@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
@@ -16,9 +16,12 @@ export default function SignUp() {
     const show = () => {
         toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: formik.values.value });
     };
+    const showError = (errType) => {
+        toast.current.show({ severity: 'error', summary: errType, detail: formik.values.value });
+    };
     const formik = useFormik({
         initialValues: {
-            Name:'',
+            Name: '',
             Id: '',
             FamilyName: '',
             Password: ''
@@ -37,14 +40,22 @@ export default function SignUp() {
             if (!data.Password) {
                 errors.Password = 'Password is required.';
             }
+            // if (!data.Name&&!data.Id&&!data.FamilyName&&!data.Password) {
+            //     errors.Id = 'all field is required.';
+            // }
             return errors;
         },
-        onSubmit: async(data) => {
-            data && show(data);
-            // formik.resetForm();
-            await axios.post(`http://localhost:8000/families/signup/`,data);
-            console.log("after post");
-            navigate('/')
+        onSubmit: async (data) => {
+            console.log("data ", data);
+            try {
+                const result = await axios.post(`http://localhost:8000/families/signup/`, data);
+                data && show(data);
+                navigate("/");
+            }
+            catch (err) {
+                data && showError(err.response.data['message']);
+                formik.resetForm();
+            }
         }
     });
 
@@ -60,28 +71,28 @@ export default function SignUp() {
                     <span className="p-float-label">
                         <Toast ref={toast} />
                         <InputText
-                            id="value"
+                            id="Name"
                             name="Name"
                             // value={value}
                             value={formik.values.Name}
                             onChange={(e) => formik.setFieldValue('Name', e.target.value)}
-                            // onChange={(e) => {
-                            //     setValue(e.value);
-                            // }}
+                        // onChange={(e) => {
+                        //     setValue(e.value);
+                        // }}
                         />
                         <label htmlFor="input_value">Name</label>
                     </span>
 
                     <br />
                     <span className="p-float-label">
-                        <InputNumber inputId="withoutgrouping" id="number-input" name="Id" value={formik.values.Id} onValueChange={(e) => formik.setFieldValue('Id', e.target.value)} useGrouping={false} />
+                        <InputNumber inputId="withoutgrouping" id="Id" name="Id" value={formik.values.Id} onValueChange={(e) => formik.setFieldValue('Id', e.target.value)} useGrouping={false} />
                         <label htmlFor="number-input">Identity</label>
                     </span>
                     <br />
                     <span className="p-float-label">
                         <Toast ref={toast} />
                         <InputText
-                            id="value"
+                            id="FamilyName"
                             name="FamilyName"
                             value={formik.values.FamilyName}
                             // onChange={(e) => {
