@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { InputText } from 'primereact/inputtext';
-import { Calendar } from 'primereact/calendar';
 import { InputNumber } from 'primereact/inputnumber';
 import { InputMask } from 'primereact/inputmask';
 import { Button } from 'primereact/button';
-import 'primeicons/primeicons.css';
+import { Calendar } from 'primereact/calendar';
 import { Dropdown } from 'primereact/dropdown';
 import { Card } from 'primereact/card';
+import 'primeicons/primeicons.css';
+import axios from 'axios';
 
 export default function UpdateDetails() {
   const [value, setValue] = useState('');
@@ -44,8 +45,8 @@ export default function UpdateDetails() {
 
   return (
     <>
-      <div className="card flex justify-content-center">
-        <Card title="Update details" style={{ width: '350px' }}>
+      <div className="card flex justify-content-center" style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
+        <Card title="Update details" style={{ width: '220px' }}>
           <p className="m-0">
             <form className="flex flex-column gap-2">
               <span className="p-float-label">
@@ -84,7 +85,7 @@ export default function UpdateDetails() {
                 placeholder="00/00/0000"
                 slotChar="mm/dd/yyyy"
               />
-              <br />
+              <br /><br />
               <InputMask
                 style={{ width: '180px' } }
                 value={value3}
@@ -92,7 +93,7 @@ export default function UpdateDetails() {
                 mask={phone == 'phone' ? '99-9999999' : '000-000-0000'}
                 placeholder="00-000000"
               />
-              <br />
+              <br /><br />
               {/* <label>Email</label> */}
               <span className="p-float-label">
                 {/* <i class="pi pi-envelope" /> */}
@@ -130,7 +131,7 @@ export default function UpdateDetails() {
                   valueTemplate={selectedCityTemplate}
                 />
               </span>
-              <br />
+              <br /><br /><br />
               <span className="card flex justify-content-center">
                 <Button label="Submit" />
               </span>
