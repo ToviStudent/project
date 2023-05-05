@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
 import { InputMask } from 'primereact/inputmask';
@@ -11,10 +11,17 @@ import axios from 'axios';
 import UseAxiosById from '../../hooks/UseAxiosById';
 import dayjs from "dayjs"
 import { Country, State, City }  from 'country-state-city';
+import UserContext from '../user/UserContext';
 
 export default function UpdateDetails() {
-  debugger
-  const fData = UseAxiosById('users', 111111111);
+  const {user} = useContext(UserContext);
+  // debugger
+  const fData = UseAxiosById('users',user.identity);
+  // let fData;
+  // useEffect(()=>{
+  //   if(user)
+  //   fData=await axios.get(`http://localhost:8000/users/${user.identity}`);
+  // },[user])
   const cities = City.getCitiesOfCountry("IL").map((city)=>{return {"name":city.name}});
     console.log({ cities });
 

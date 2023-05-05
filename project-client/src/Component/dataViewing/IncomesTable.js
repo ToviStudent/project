@@ -1,24 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import axios from 'axios';
 import { Calendar } from 'primereact/calendar';
 import { Card } from 'primereact/card';
+import UserContext from '../user/UserContext';
 
 
 export default function IncomesTable() {
+    const user = useContext(UserContext);
     const[incomes,setIncomes]=useState();
     const [date,setDate]=useState(new Date());
     const[totalIncomes,setTotalIncomes]=useState();
     useEffect(() => {
         if(date){
-        axios.get(`http://localhost:8000/incomes/${1}`,
+        axios.get(`http://localhost:8000/incomes/${user.familyId}`,
             { params: { month: date.getMonth()+1, year: date.getFullYear() } })
             .then(data => {
                 console.log({ data });
                 setIncomes(data.data);
             });
-            axios.get(`http://localhost:8000/incomes/totalsum/${1}`,
+            axios.get(`http://localhost:8000/incomes/totalsum/${user.familyId}`,
             { params: { month: date.getMonth()+1, year: date.getFullYear() } })
             .then(data => {
                 console.log({ data });

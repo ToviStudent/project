@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Chart } from 'primereact/chart';
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { Calendar } from 'primereact/calendar';
 import { Card } from 'primereact/card';
+import UserContext from '../user/UserContext';
 
 export default function PieChartDemo() {
     const navigate = useNavigate();
+    const user = useContext(UserContext);
     const [date, setDate] = useState(new Date());
     const [expenses, setExpenses] = useState();
     const [chartData, setChartData] = useState({});
@@ -15,7 +17,7 @@ export default function PieChartDemo() {
     const [chartKeys, setChartKeys] = useState({});
     const [chartValues, setChartValues] = useState({});
     useEffect(() => {
-        axios.get(`http://localhost:8000/expenses/getexpense/${1}`,
+        axios.get(`http://localhost:8000/expenses/getexpense/${user.familyId}`,
             { params: { month: date.getMonth() + 1, year: date.getFullYear() } })
             .then(data => {
                 console.log({ data });
@@ -89,7 +91,7 @@ export default function PieChartDemo() {
     }, [chartKeys, chartValues]);
 
     const fetchTable = (index) => {
-        axios.get(`http://localhost:8000/expenses/expense_category/${1}`,
+        axios.get(`http://localhost:8000/expenses/expense_category/${user.familyId}`,
             { params: { month: date.getMonth()+1, year: date.getFullYear(), categoryName: chartKeys[index] } })
             .then(data => {
                 console.log(data.data);

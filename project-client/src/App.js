@@ -28,15 +28,15 @@ function App() {
   const [userId, setUserId] = useState('');
 
   //localStorage:
-  // useEffect(() => {
-  //   console.log(localStorage.getItem("user"));
-  //   const userFromLocalStorage = localStorage.getItem("user")
-  //   console.log(userFromLocalStorage);
-  //   if (!userFromLocalStorage) return;
-  //   const parsedUser = JSON.parse(userFromLocalStorage)
-  //   console.log({ parsedUser });
-  //   setUserId(parsedUser.data.identity)
-  // }, []);
+  useEffect(() => {
+    // console.log(localStorage.getItem("user"));
+    const userFromLocalStorage = localStorage.getItem("user")
+    // console.log({userFromLocalStorage});
+    if (!userFromLocalStorage) return;
+    const parsedUser = JSON.parse(userFromLocalStorage)
+    // console.log({ parsedUser });
+    setUserId(parsedUser.data.identity)
+  }, []);
 
 
   const setUserIdCallback = (id) => {
@@ -46,7 +46,7 @@ function App() {
     <>
       <UserProvider userId={userId}>
         {/* {userId == '' && <Login setUserId={setUserIdCallback}></Login>} */}
-        {/* {userId ?  */}
+        {userId ? 
         <Routes>
           {/* <Route exact path='/signup' element={<SignUp />}></Route> */}
           {/* <Route exact path='/login' element={<Login setUserId={setUserIdCallback} />}></Route> */}
@@ -67,9 +67,10 @@ function App() {
           <Route exact path='/expensesTable' element={<ExpensesTable />}></Route>
           <Route exact path='/incomesTable' element={<IncomesTable />}></Route>
         </Routes> 
-          {/* // :<Login setUserId={setUserIdCallback} /> */}
-          {/* <LoginSignUp setUserId={setUserIdCallback}></LoginSignUp> */}
-        {/* } */}
+           :
+          //  <Login setUserId={setUserIdCallback} />
+          <LoginSignUp setUserId={setUserIdCallback}></LoginSignUp>
+        }
       </UserProvider>
     </>
   );
