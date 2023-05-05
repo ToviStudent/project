@@ -3,9 +3,12 @@ import { Chart } from 'primereact/chart';
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import { Calendar } from 'primereact/calendar';
+import { Card } from 'primereact/card';
 
 export default function PieChartDemo() {
     const navigate = useNavigate();
+    const [date, setDate] = useState(new Date());
     const [expenses, setExpenses] = useState();
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
@@ -13,12 +16,12 @@ export default function PieChartDemo() {
     const [chartValues, setChartValues] = useState({});
     useEffect(() => {
         axios.get(`http://localhost:8000/expenses/getexpense/${1}`,
-            { params: { month: 1, year: 2023 } })
+            { params: { month: date.getMonth() + 1, year: date.getFullYear() } })
             .then(data => {
                 console.log({ data });
                 setExpenses(data.data);
             })
-    }, []);
+    }, [date]);
     useEffect(() => {
         if (expenses) {
             console.log("expenses ", expenses);
@@ -87,7 +90,7 @@ export default function PieChartDemo() {
 
     const fetchTable = (index) => {
         axios.get(`http://localhost:8000/expenses/expense_category/${1}`,
-            { params: { month: 1, year: 2023, categoryName: chartKeys[index] } })
+            { params: { month: date.getMonth()+1, year: date.getFullYear(), categoryName: chartKeys[index] } })
             .then(data => {
                 console.log(data.data);
                 navigate('/expensesTable', { state: data.data });
@@ -99,13 +102,18 @@ export default function PieChartDemo() {
 
     return (
         <div className="card flex justify-content-center">
-            <h2>expenses</h2>
-            <Chart
-                type="pie"
-                data={chartData}
-                options={chartOptions}
-                plugins={[ChartDataLabels]}
-                className="w-full md:w-30rem" />
+            <Card className="md:w-25rem">
+                <h2>expenses</h2>
+                <div className="card flex justify-content-center">
+                    <Calendar value={date} onChange={(e) => setDate(e.value)} view="month" dateFormat="mm/yy" />
+                </div>
+                {date && <Chart
+                    type="pie"
+                    data={chartData}
+                    options={chartOptions}
+                    plugins={[ChartDataLabels]}
+                    className="w-full md:w-30rem" />}
+            </Card>
         </div>
     )
 }

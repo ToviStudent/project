@@ -16,8 +16,8 @@ function Home() {
     { label: "permissions", icon: <i class="pi pi-lock-open"></i> },
   ];
   const items2 = [
-    { label: "view expenses", icon: <i class="pi pi-arrow-circle-up"></i> },
-    { label: "view incomes", icon: <i class="pi pi-arrow-circle-down"></i> },
+    { label: "view expenses", icon: <i class="pi pi-arrow-circle-up"></i> ,command:()=>navigate('/expensesView')},
+    { label: "view incomes", icon: <i class="pi pi-arrow-circle-down"></i>,command:()=>navigate('/incomesTable')},
   ];
   const family = "Halbershtam";
   console.log({ user });
