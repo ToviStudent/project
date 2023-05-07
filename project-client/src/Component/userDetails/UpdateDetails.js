@@ -14,9 +14,9 @@ import { Country, State, City }  from 'country-state-city';
 import UserContext from '../user/UserContext';
 
 export default function UpdateDetails() {
-  const {user} = useContext(UserContext);
+  const user = useContext(UserContext);
   // debugger
-  const fData = UseAxiosById('users',111111111);
+  const fData = UseAxiosById('users',user?.identity);
   // let fData;
   // const fetchFunc=async()=>{
   //   // fData = UseAxiosById('users',user.identity);
