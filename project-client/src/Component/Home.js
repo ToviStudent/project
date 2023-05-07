@@ -7,20 +7,17 @@ import UserContext from "./user/UserContext";
 import { Button } from "primereact/button";
 
 function Home() {
-  // const{data,loading,refetch,error}=UseAxiosGet('users/');
-  // useEffect(()=>{console.log('data',data);},[data])
   const user = useContext(UserContext);
   const navigate = useNavigate();
 
   const items1 = [
-    { label: "permissions", icon: <i class="pi pi-lock-open"></i> },
+    { label: "permissions", icon: <i class="pi pi-lock-open"></i>, command: () => navigate('/usersPermissions') },
   ];
   const items2 = [
-    { label: "view expenses", icon: <i class="pi pi-arrow-circle-up"></i> },
-    { label: "view incomes", icon: <i class="pi pi-arrow-circle-down"></i> },
+    { label: "view expenses", icon: <i class="pi pi-arrow-circle-up"></i>, command: () => navigate('/expensesView') },
+    { label: "view incomes", icon: <i class="pi pi-arrow-circle-down"></i>, command: () => navigate('/incomesTable') },
   ];
-  const family = "Halbershtam";
-  console.log({ user });
+
   return (
     <>
       <h1>Hello {user?.familyName} family</h1>
@@ -52,7 +49,9 @@ function Home() {
           <br />
           <br />
           <br />
-          <Button label="charity" />
+          <Button label="charity" onClick={() => {
+            navigate('/Charity');
+          }} />
           <br />
           <br />
           <br />

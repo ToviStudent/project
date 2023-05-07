@@ -12,9 +12,6 @@ import UsersPermissions from './component/permissions/UsersPermissions';
 import PermissionsTable from './component/permissions/PermissionsTable';
 import CustomersTable from './component/manager/customers/CustomersTable';
 import AddCategory from './component/manager/categories/AddCategory';
-// import CategoryChart from './component/manager/charts/CategoryChart';
-// import CityChart from './component/manager/charts/CityChart';
-// import AgeChart from './component/manager/charts/AgeChart';
 import StatData from './component/manager/charts/StatData';
 import UserProvider from './component/user/UserProvider'
 import LoginSignUp from './component/login/LoginSignUp';
@@ -22,21 +19,28 @@ import CategoryChart from './component/manager/charts/CategoryChart';
 import CityChart from './component/manager/charts/CityChart';
 import AgeChart from './component/manager/charts/AgeChart';
 import DialogAddCategory from './component/manager/categories/DialogAddCategory';
+<<<<<<< HEAD
 import Charity from './expenses/charity';
+=======
+import Charity from './component/expenses/charity';
+import ExpensesView from './component/dataViewing/ExpensesView';
+import ExpensesTable from './component/dataViewing/ExpensesTable';
+import IncomesTable from './component/dataViewing/IncomesTable';
+>>>>>>> d0999fdcfa92410ccae455160eb9d0494519e7e1
 
 function App() {
   const [userId, setUserId] = useState('');
 
   //localStorage:
-  // useEffect(() => {
-  //   console.log(localStorage.getItem("user"));
-  //   const userFromLocalStorage = localStorage.getItem("user")
-  //   console.log(userFromLocalStorage);
-  //   if (!userFromLocalStorage) return;
-  //   const parsedUser = JSON.parse(userFromLocalStorage)
-  //   console.log({ parsedUser });
-  //   setUserId(parsedUser.data.identity)
-  // }, []);
+  useEffect(() => {
+    // console.log(localStorage.getItem("user"));
+    const userFromLocalStorage = localStorage.getItem("user")
+    // console.log({userFromLocalStorage});
+    if (!userFromLocalStorage) return;
+    const parsedUser = JSON.parse(userFromLocalStorage)
+    // console.log({ parsedUser });
+    setUserId(parsedUser.data.identity)
+  }, []);
 
 
   const setUserIdCallback = (id) => {
@@ -46,7 +50,7 @@ function App() {
     <>
       <UserProvider userId={userId}>
         {/* {userId == '' && <Login setUserId={setUserIdCallback}></Login>} */}
-        {/* {userId ?  */}
+        {userId ? 
         <Routes>
           {/* <Route exact path='/signup' element={<SignUp />}></Route> */}
           {/* <Route exact path='/login' element={<Login setUserId={setUserIdCallback} />}></Route> */}
@@ -63,10 +67,14 @@ function App() {
           <Route exact path='/cityChart' element={<CityChart />}></Route>
           <Route exact path='/ageChart' element={<AgeChart />}></Route>
           <Route exact path='/charts' element={<StatData />}></Route>
-        </Routes> :
-          {/* // <Login setUserId={setUserIdCallback} /> */}
-          {/* <LoginSignUp setUserId={setUserIdCallback}></LoginSignUp> */}
-        {/* } */}
+          <Route exact path='/expensesView' element={<ExpensesView />}></Route>
+          <Route exact path='/expensesTable' element={<ExpensesTable />}></Route>
+          <Route exact path='/incomesTable' element={<IncomesTable />}></Route>
+        </Routes> 
+           :
+          //  <Login setUserId={setUserIdCallback} />
+          <LoginSignUp setUserId={setUserIdCallback}></LoginSignUp>
+        }
       </UserProvider>
     </>
   );

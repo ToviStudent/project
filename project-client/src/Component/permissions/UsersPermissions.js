@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
@@ -10,11 +10,13 @@ import UseAxiosById from '../../hooks/UseAxiosById';
 import UseAxiosGet from '../../hooks/UseAxiosGet';
 import axios from 'axios';
 import _ from 'lodash';//isEqual
+import UserContext from '../user/UserContext';
 
 export default function UsersPermissions() {
+    const user = useContext(UserContext);
     const [perUsers, setPerUsers] = useState(null);
 
-    const { data, loading, refetch, error } = UseAxiosById('users/permissions', "111111111");
+    const { data, loading, refetch, error } = UseAxiosById('users/permissions', user.iduser);
 
     const permissions = UseAxiosGet('permissions/');
     useEffect(() => { console.log('dataPermission', permissions.data); }, [permissions.data])
