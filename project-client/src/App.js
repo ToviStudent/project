@@ -19,14 +19,10 @@ import CategoryChart from './component/manager/charts/CategoryChart';
 import CityChart from './component/manager/charts/CityChart';
 import AgeChart from './component/manager/charts/AgeChart';
 import DialogAddCategory from './component/manager/categories/DialogAddCategory';
-<<<<<<< HEAD
-import Charity from './expenses/charity';
-=======
 import Charity from './component/expenses/charity';
 import ExpensesView from './component/dataViewing/ExpensesView';
 import ExpensesTable from './component/dataViewing/ExpensesTable';
 import IncomesTable from './component/dataViewing/IncomesTable';
->>>>>>> d0999fdcfa92410ccae455160eb9d0494519e7e1
 
 function App() {
   const [userId, setUserId] = useState('');
@@ -39,7 +35,7 @@ function App() {
     if (!userFromLocalStorage) return;
     const parsedUser = JSON.parse(userFromLocalStorage)
     // console.log({ parsedUser });
-    setUserId(parsedUser.data.identity)
+    setUserId(parsedUser.identity)
   }, []);
 
 

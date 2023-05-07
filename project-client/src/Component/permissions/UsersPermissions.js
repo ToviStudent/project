@@ -16,7 +16,7 @@ export default function UsersPermissions() {
     const user = useContext(UserContext);
     const [perUsers, setPerUsers] = useState(null);
 
-    const { data, loading, refetch, error } = UseAxiosById('users/permissions', user.iduser);
+    const { data, loading, refetch, error } = UseAxiosById('users/permissions', user.identity);
 
     const permissions = UseAxiosGet('permissions/');
     useEffect(() => { console.log('dataPermission', permissions.data); }, [permissions.data])

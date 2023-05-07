@@ -16,12 +16,18 @@ import UserContext from '../user/UserContext';
 export default function UpdateDetails() {
   const {user} = useContext(UserContext);
   // debugger
-  const fData = UseAxiosById('users',user.identity);
+  const fData = UseAxiosById('users',111111111);
   // let fData;
+  // const fetchFunc=async()=>{
+  //   // fData = UseAxiosById('users',user.identity);
+  //   fData=await axios.get(`http://localhost:8000/users/${user.identity}`);
+  //   console.log("fdata: "+fData);
+  // }
   // useEffect(()=>{
   //   if(user)
+  //   fetchFunc();
   //   fData=await axios.get(`http://localhost:8000/users/${user.identity}`);
-  // },[user])
+  // },[])
   const cities = City.getCitiesOfCountry("IL").map((city)=>{return {"name":city.name}});
     console.log({ cities });
 
@@ -40,7 +46,7 @@ export default function UpdateDetails() {
 
   useEffect(() => {
     if (fData.data) {
-      console.log(fData.data);
+      console.log({fData});
       setValue(fData.data.firstName);
       setValue2(fData.data.identity);
       // setValue3(fData.data.pelephone);
