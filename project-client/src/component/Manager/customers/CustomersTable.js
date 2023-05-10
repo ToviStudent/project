@@ -125,7 +125,7 @@ export default function CustomersTable() {
         <Column expander={allowExpansion} style={{ width: "5rem" }} />
         <Column field="familyName" header="familyName" />
         <Column field="city" header="city" />
-        <Column field="pelephone" header="pelephone" />
+        <Column field="phone" header="phone" />
         <Column field="email" header="email" />
       </DataTable>
     </div>

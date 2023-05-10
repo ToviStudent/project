@@ -58,12 +58,13 @@ export default function UpdateDetails() {
       // identity: identity ? identity : user.identity,
       firstName: fName ? fName : user.firstName,
       // familyName: lName ? lName : user.familyName,
-      birthDate: date ? dayjs(date).format("DD/MM/YYYY") : user.birthDate,
+      birthdate: date ? dayjs(date).format("DD/MM/YYYY") : user.birthDate,
       phone: phone ? phone : user.phone,
       email: email ? email : user.email,
       city: selectedCity.name ? selectedCity.name : user.city,
     };
     try {
+      console.log({obj});
       axios
         .put(`http://localhost:8000/users/${user.identity}`, obj)
         .then((data) => console.log(data));

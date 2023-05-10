@@ -3,8 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-import SignUp from './component/login/SignUp';
-import Login from './component/login/Login';
+// import SignUp from './component/login/SignUp';
+// import Login from './component/login/Login';
 import Home from './component/Home';
 import HomeManager from './component/manager/HomeManager'
 import UpdateDetails from './component/userDetails/UpdateDetails';
@@ -14,7 +14,7 @@ import CustomersTable from './component/manager/customers/CustomersTable';
 import AddCategory from './component/manager/categories/AddCategory';
 import StatData from './component/manager/charts/StatData';
 import UserProvider from './component/user/UserProvider'
-import LoginSignUp from './component/login/LoginSignUp';
+import LoginSignUp from './component/login/LoginSignUp'
 import CategoryChart from './component/manager/charts/CategoryChart';
 import CityChart from './component/manager/charts/CityChart';
 import AgeChart from './component/manager/charts/AgeChart';

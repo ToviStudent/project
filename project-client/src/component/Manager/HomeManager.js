@@ -3,7 +3,7 @@ import { Card } from 'primereact/card';
 import { SplitButton } from 'primereact/splitbutton';
 import React from 'react';   
 import { useNavigate } from 'react-router-dom';
-import ItemsButton from '../home/ItemsButton';
+import ItemsButton from '../home/ItemsButton'
 
 function HomeManeger() {
   const navigate=useNavigate();
