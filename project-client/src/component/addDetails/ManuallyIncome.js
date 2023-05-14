@@ -13,8 +13,6 @@ import { Field, useFormik } from 'formik';
 
 const ManuallyIncome = () => {
   const [value, setValue] = useState();
-  // const [value1, setValue1] = useState();
-  const [value2, setValue2] = useState('');
   const [date, setDate] = useState(new Date());
   const [selectedType, setSelectedType] = useState(null);
 
@@ -27,7 +25,8 @@ const ManuallyIncome = () => {
 
   const selectType = (option, props) => {
     if (option) {
-      return (<div className="flex align-items-center">{option.name}</div>);}
+      return (<div className="flex align-items-center">{option.name}</div>);
+    }
     return <span>{props.placeholder}</span>;
   };
 
@@ -76,7 +75,7 @@ const ManuallyIncome = () => {
         bankEntryDate: data.bankEntryDate,
         year: data.year,
         month: data.month,
-        type: data.type,
+        type: data.type.name,
         beneficiary: data.beneficiary
       }
       console.log('obj', obj);
@@ -101,18 +100,24 @@ const ManuallyIncome = () => {
         <Card title="Incomes- Manual entry 🤞🤘👌" style={{ width: '350px' }}>
           <p className="m-0">
             <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
-              <span className="flex-auto">
-                <label htmlFor="locale-user" className="font-bold block mb-2">amount of income</label>
+              <span className="p-float-label">
+                {/* <label htmlFor="locale-user" className="font-bold block mb-2">amount of income</label> */}
                 {/* <Toast ref={toast} /> */}
-                <InputNumber inputId="locale-user" id="sumOfMoney" name="sumOfMoney"
+                <InputNumber inputId="locale-user"
+                  id="sumOfMoney"
+                  name="sumOfMoney"
                   value={formik.values.sumOfMoney}
                   onChange={(e) => formik.setFieldValue("sumOfMoney", e.value)}
-                  minFractionDigits={2} />
+                  minFractionDigits={2}
+                  placeholder="0.00"
+                />
+                {getFormErrorMessage("sumOfMoney")}
+                <label htmlFor="username">amount of income</label>
               </span>
-              {getFormErrorMessage("sumOfMoney")}
-              <br />
+
+
               <span className="fp-float-label">
-                <label htmlFor="locale-user" className="font-bold block mb-2">type of income</label>
+                {/* <label htmlFor="locale-user" className="font-bold block mb-2">type of income</label> */}
                 <Dropdown
                   id="type"
                   name="type"
@@ -122,12 +127,12 @@ const ManuallyIncome = () => {
                   // onChange={(e) => formik.setFieldValue("type", e.target.value.name)}
                   options={types}
                   optionLabel="name"
-                  placeholder="choose"
+                  placeholder="type of income"
                   filter valueTemplate={selectType}
                 />
               </span>
               <br />
-              <label htmlFor="locale-user" className="font-bold block mb-2">source of income</label>
+              {/* <label htmlFor="locale-user" className="font-bold block mb-2">source of income</label> */}
               <span className="p-float-label">
                 <InputText
                   id="source"
@@ -135,11 +140,11 @@ const ManuallyIncome = () => {
                   value={formik.values.source}
                   onChange={(e) => formik.setFieldValue("source", e.target.value)}
                 />
-                <label htmlFor="username">source</label>
+                <label htmlFor="username">source of income</label>
               </span>
               {getFormErrorMessage("source")}
               <br />
-              <label htmlFor="locale-user" className="font-bold block mb-2">beneficiary of income</label>
+              {/* <label htmlFor="locale-user" className="font-bold block mb-2">beneficiary of income</label> */}
               <span className="p-float-label">
                 <InputText
                   id="beneficiary"
@@ -147,22 +152,25 @@ const ManuallyIncome = () => {
                   value={formik.values.beneficiary}
                   onChange={(p) => formik.setFieldValue("beneficiary", p.target.value)}
                 />
-                <label htmlFor="username">beneficiary</label>
+                <label htmlFor="username">beneficiary of income</label>
               </span>
-              <br />
-              <label htmlFor="locale-user" className="font-bold block mb-2">date of income</label>
-              <Calendar
-                id="incomeDate"
-                name="incomeDate"
-                style={{ width: '180px' }}
-                // value={formik.values.date}
-                value={date}
-                onChange={(e) => formik.setFieldValue("incomeDate", e.target.value)}
-                mask="99/99/9999"
-                placeholder="00/00/0000"
-                slotChar="mm/dd/yyyy"
-              />
-              {getFormErrorMessage("incomeDate")}
+              <br /><br />
+              <span className="p-float-label">
+                {/* <label htmlFor="locale-user" className="font-bold block mb-2">date of income</label> */}
+                <Calendar
+                  id="incomeDate"
+                  name="incomeDate"
+                  style={{ width: '180px' }}
+                  // value={formik.values.date}
+                  value={date}
+                  onChange={(e) => formik.setFieldValue("incomeDate", e.target.value)}
+                  mask="99/99/9999"
+                  placeholder="00/00/0000"
+                  slotChar="mm/dd/yyyy"
+                />
+                {getFormErrorMessage("incomeDate")}
+                <label htmlFor="username">date of income</label>
+              </span>
               <br /> <br />
               <span className="card flex justify-content-center">
 

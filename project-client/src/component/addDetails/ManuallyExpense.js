@@ -14,15 +14,14 @@ import UseAxiosById from "../../hooks/UseAxiosById";
 
 const ManuallyExpense = () => {
     const [categories, setCategories] = useState(null);
-    const [value, setValue] = useState();
     const [date, setDate] = useState(new Date());
-    const [selectedType, setSelectedType] = useState(null);
 
     const selectCategories = (option, props) => {
         if (option) {
-          return (<div className="flex align-items-center">{option.categoryName}</div>);}
+            return (<div className="flex align-items-center">{option.name}</div>);
+        }
         return <span>{props.placeholder}</span>;
-      };
+    };
 
     const toast = useRef(null);
 
@@ -38,11 +37,11 @@ const ManuallyExpense = () => {
             month: newDate.getMonth() + 1,
             year: newDate.getFullYear(),
             purchaseDate: newDate.getDate(),
-            paymentNumber: 0,
+            paymentNumber: '',
             mainPayment: 0,
-            categoryName: '',
+            // categoryName: '',
             productName: '',
-            price: 0,
+            price: '',
             generalDescription: ''
         },
         validate: (data) => {
@@ -70,23 +69,26 @@ const ManuallyExpense = () => {
         onSubmit: async (data) => {
             console.log('data', data);
             setDate((formik.values.date));
-            var obj = {
-                familyId: 1,
-                month: data.month,
-                year: data.year,
-                purchaseDate: data.purchaseDate,
-                paymentNumber: data.paymentNumber,
-                mainPayment: 100,
-                categoryName: data.categoryName,
-                productName: data.productName,
-                price: data.price,
-                generalDescription: data.generalDescription
+            for (let i = 1; i <= data.paymentNumber; i++) {
+                var obj = {
+                    familyId: 1,
+                    month: data.month + (i - 1),
+                    year: data.year,
+                    purchaseDate: data.purchaseDate,
+                    paymentNumber: i,
+                    mainPayment: 100,
+                    categoryId: data.categoryName.idcategory,
+                    productName: data.productName,
+                    price: data.price / data.paymentNumber,
+                    generalDescription: data.generalDescription
+                }
+                console.log(obj);
+                await axios.post(`http://localhost:8000/expenses/`, obj);
+                console.log("the post workkkkk😁")
             }
-            console.log(obj);
-            await axios.post(`http://localhost:8000/expenses/`, obj);
-            console.log("the post workkkkk😁")
             data && show(data);
             formik.resetForm();
+
         }
     });
 
@@ -110,7 +112,7 @@ const ManuallyExpense = () => {
             );
 
             console.log("categories", categories.data);
-            categories.data=categories.data.map((c)=>{return {name:c.categoryName,idcategory:c.idcategory}})
+            categories.data = categories.data.map((c) => { return { name: c.categoryName, idcategory: c.idcategory } })
             console.log(categories.data);
             setCategories((categories.data));
 
@@ -129,7 +131,7 @@ const ManuallyExpense = () => {
                 <Card title="Expenses- Manual entry 🤞🤘👌" style={{ width: '350px' }}>
                     <p className="m-0">
                         <form onSubmit={formik.handleSubmit} className="flex flex-column gap-2">
-                            <label htmlFor="locale-user" className="font-bold block mb-2">product name</label>
+                            {/* <label htmlFor="locale-user" className="font-bold block mb-2">product name</label> */}
                             <span className="p-float-label">
                                 <InputText
                                     id="productName"
@@ -138,19 +140,22 @@ const ManuallyExpense = () => {
                                     onChange={(e) => formik.setFieldValue("productName", e.target.value)}
                                 />
                                 {getFormErrorMessage("productName")}
-                                <label htmlFor="username">productName</label>
+                                <label htmlFor="username">product Name</label>
                             </span>
-
                             <br />
-                            <span className="flex-auto">
-                                <label htmlFor="locale-user" className="font-bold block mb-2">price of expense</label>
+                            <span className="p-float-label">
+                                {/* <label htmlFor="locale-user" className="font-bold block mb-2">price of expense</label> */}
                                 {/* <Toast ref={toast} /> */}
                                 <InputNumber inputId="locale-user" id="price" name="price"
                                     value={formik.values.price}
                                     onChange={(e) => formik.setFieldValue("price", e.value)}
-                                    minFractionDigits={2} />
+                                    mask="0.00"
+                                    placeholder="0.00"
+                                    minFractionDigits={2}
+                                />
+                                {getFormErrorMessage("price")}
+                                <label htmlFor="username">price of expense</label>
                             </span>
-                            {getFormErrorMessage("price")}
                             <br /><br />
                             <label htmlFor="locale-user" className="font-bold block mb-2">purchase date</label>
                             <Calendar
@@ -166,9 +171,11 @@ const ManuallyExpense = () => {
                             />
                             <br />
                             <span className="flex-auto">
-                                <label htmlFor="locale-user" className="font-bold block mb-2">payment number</label>                               
+                                <label htmlFor="locale-user" className="font-bold block mb-2">payment number</label>
                                 <InputNumber inputId="locale-user" id="paymentNumber" name="paymentNumber"
                                     value={formik.values.paymentNumber}
+                                    mask="1"
+                                    placeholder="1"
                                     onChange={(e) => formik.setFieldValue("paymentNumber", e.value)}
                                 />
                             </span>
@@ -182,7 +189,7 @@ const ManuallyExpense = () => {
                                     // style={{ width: '180px' }}
                                     // value={categories.categoryName}
                                     value={formik.values.categoryName}
-                                    onChange={(e) => formik.setFieldValue("categories", e.target.value)}
+                                    onChange={(e) => formik.setFieldValue("categoryName", e.target.value)}
                                     // onChange={(e) => formik.setFieldValue("type", e.target.value.name)}
                                     options={categories}
                                     optionLabel="name"
@@ -199,7 +206,7 @@ const ManuallyExpense = () => {
                             </span>
                             {getFormErrorMessage("categoryId")} */}
                             <br /><br />
-                            <label htmlFor="locale-user" className="font-bold block mb-2">general description</label>
+                            {/* <label htmlFor="locale-user" className="font-bold block mb-2">general description</label> */}
                             <span className="p-float-label">
                                 <InputText
                                     id="generalDescription"
@@ -207,7 +214,7 @@ const ManuallyExpense = () => {
                                     value={formik.values.generalDescription}
                                     onChange={(e) => formik.setFieldValue("generalDescription", e.target.value)}
                                 />
-                                <label htmlFor="username">generalDescription</label>
+                                <label htmlFor="username">general Description</label>
                             </span>
                             <br />
                             <span className="card flex justify-content-center">
