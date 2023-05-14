@@ -19,7 +19,7 @@ function Home() {
   const items2 = [
     { label: "view expenses", icon: <i class="pi pi-arrow-circle-up"></i>, command: () => navigate('/expensesView') },
     { label: "view incomes", icon: <i class="pi pi-arrow-circle-down"></i>, command: () => navigate('/incomesTable') },
-    { label: "year view", icon: <i class="pi pi-arrow-circle-down"></i>, command: () => navigate('/yearView') },
+    { label: "year view", icon: <i class="pi pi-arrow-circle-right"></i>, command: () => navigate('/yearView') },
   ];
 
   return (
