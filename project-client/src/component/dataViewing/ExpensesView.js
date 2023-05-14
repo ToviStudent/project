@@ -98,20 +98,23 @@ export default function ExpensesView() {
   }, [chartKeys, chartValues]);
 
   const fetchTable = (index) => {
+    const params = {
+      month: date.getMonth() + 1,
+      year: date.getFullYear(),
+      categoryName: chartKeys[index],
+    };
     axios
       .get(
         `http://localhost:8000/expenses/expense_category/${user?.familyId}`,
         {
-          params: {
-            month: date.getMonth() + 1,
-            year: date.getFullYear(),
-            categoryName: chartKeys[index],
-          },
+          params: params,
         }
       )
       .then((data) => {
         console.log(data.data);
-        navigate("/expensesTable", { state: data.data });
+        navigate("/expensesTable", {
+          state: { data: data.data, params: params },
+        });
       })
       .catch((err) => console.log(err));
   };

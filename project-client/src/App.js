@@ -28,6 +28,7 @@ import CameraIncome from './component/addDetails/CameraIncome';
 import ManuallyIncome from './component/addDetails/ManuallyIncome';
 import CameraExpense from './component/addDetails/CameraExpense';
 import ManuallyExpense from './component/addDetails/ManuallyExpense';
+import YearView from './component/dataViewing/YearView';
 
 function App() {
   const [userId, setUserId] = useState('');
@@ -76,6 +77,7 @@ function App() {
           <Route exact path='/expensesView' element={<ExpensesView />}></Route>
           <Route exact path='/expensesTable' element={<ExpensesTable />}></Route>
           <Route exact path='/incomesTable' element={<IncomesTable />}></Route>
+          <Route exact path='/yearView' element={<YearView />}></Route>
         </Routes> 
            :
           //  <Login setUserId={setUserIdCallback} />
