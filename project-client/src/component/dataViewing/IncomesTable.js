@@ -8,7 +8,7 @@ import UserContext from '../user/UserContext';
 
 
 export default function IncomesTable() {
-    const user = useContext(UserContext);
+    const {user} = useContext(UserContext);
     const[incomes,setIncomes]=useState();
     const [date,setDate]=useState(new Date());
     const[totalIncomes,setTotalIncomes]=useState();

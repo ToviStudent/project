@@ -13,7 +13,7 @@ import _ from 'lodash';//isEqual
 import UserContext from '../user/UserContext';
 
 export default function UsersPermissions() {
-    const user = useContext(UserContext);
+    const {user} = useContext(UserContext);
     const [perUsers, setPerUsers] = useState(null);
 
     const { data, loading, refetch, error } = UseAxiosById('users/permissions', user.identity);
