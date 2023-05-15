@@ -11,7 +11,7 @@ const UserProvider = ({ children, userId }) => {
       axios.get(`http://localhost:8000/users/${userId}`).then((data) => {
         console.log({ data });
         setUser(data.data);
-        data&&localStorage.setItem("user",JSON.stringify(data.data))
+        data&&localStorage.setItem("user",JSON.stringify(data.data.identity))
       });
     }
   }, [userId]);

@@ -69,7 +69,7 @@ export default function UpdateDetails() {
         .put(`http://localhost:8000/users/${user.identity}`, obj)
         .then((data) => console.log(data));
       setUser({ ...user, ...obj });
-      localStorage.setItem("user", JSON.stringify({ ...user, ...obj }));
+      // localStorage.setItem("user", JSON.stringify({ ...user, ...obj }));
     } catch (err) {
       console.log({ err });
     }

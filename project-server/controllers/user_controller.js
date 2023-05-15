@@ -142,6 +142,7 @@ exports.getPermitByIdUser = async (req, res) => {
 //get permit_users_table by family
 exports.getUsersPermission = async (req, res) => {
   const user = await UserDB.getUserById(req.params.id);
+  console.log("user:    ",user);
   const _familyId = user.dataValues['familyId'];
   // if(!_familyId)
   //     res.status(400).json({message:'not recieve familyId'});
