@@ -127,6 +127,7 @@ const Login = (props) => {
             type="new family"
             label="new family"
             onClick={() => {
+              console.log("onClick");
               props.setNewFamily();
             }}
           />
