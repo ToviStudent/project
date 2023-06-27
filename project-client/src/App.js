@@ -36,7 +36,8 @@ import { useNavigate } from "react-router-dom";
 function App() {
   const navigate = useNavigate();
   const [userId, setUserId] = useState('');
-  const start = <img alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" height="50" className="mr-2"></img>;
+  const start = <img alt="logo" src="./logo.png" height="50" className="mr-2"></img>;
+  // https://primefaces.org/cdn/primereact/images/logo.png
   const end = <>
     <Button className="pi pi-user p-button-rounded" onClick={() => {
       navigate('/updateDetails');
@@ -54,7 +55,7 @@ function App() {
     if (!userFromLocalStorage) return;
     const parsedUser = JSON.parse(userFromLocalStorage)
     // console.log({ parsedUser });
-    setUserId(parsedUser.identity)
+    setUserId(parsedUser)
   }, []);
 
 

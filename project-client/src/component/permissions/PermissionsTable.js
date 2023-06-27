@@ -18,7 +18,7 @@ export default function PermissionsTable() {
   const headerTemplate = (data) => {
     return (
       <div className="flex align-items-center gap-2">
-        <span className="font-bold">{data.permission.permissionName}</span>
+        <span className="font-bold">{data!==undefined&&data}</span>
       </div>
     );
   };
