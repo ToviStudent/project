@@ -4,7 +4,6 @@ import { Column } from 'primereact/column';
 // import { CustomerService } from './service';
 import UseAxiosGet from '../../hooks/UseAxiosGet';
 
-
 export default function PermissionsTable() {
   const [permissions_processes] = useState(['edit', 'view', 'non']);
   
@@ -18,7 +17,8 @@ export default function PermissionsTable() {
   const headerTemplate = (data) => {
     return (
       <div className="flex align-items-center gap-2">
-        <span className="font-bold">{data.permission.permissionName}</span>
+        <span className="font-bold">{data!==undefined&&data}</span>
+        {/* .permission.permissionName */}
       </div>
     );
   };

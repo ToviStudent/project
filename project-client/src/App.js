@@ -35,7 +35,8 @@ import { useNavigate } from "react-router-dom";
 function App() {
   const navigate = useNavigate();
   const [userId, setUserId] = useState('');
-  const start = <img alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" height="50" className="mr-2"></img>;
+  const start = <img alt="logo" src="./moneyMindLogo.png" height="50" className="mr-2"></img>;
+  //src="https://primefaces.org/cdn/primereact/images/logo.png"
   const end = <>
     <Button className="pi pi-user p-button-rounded" onClick={() => {
       navigate('/updateDetails');
